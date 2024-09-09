@@ -1,0 +1,17 @@
+{
+  "name": "projeto_turmas",
+  "version": "1.0.0",
+  "description": "projeto de exemplo para testes de unidade",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsx --test --watch test/**.spec.ts"
+  },
+  "author": "edson",
+  "license": "ISC",
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.2",
+    "@types/node": "^22.5.4"
+  },
+  "dependencies": {}
+}
