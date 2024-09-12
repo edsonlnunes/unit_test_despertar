@@ -1,4 +1,5 @@
 import { Aluno } from "./aluno";
+import { Prova } from "./prova";
 import { Utils } from "./utils";
 
 export class Turma {
@@ -14,5 +15,16 @@ export class Turma {
         this.#alunos = [];
     }
 
-    // matricular aluno //set
+    matricularAluno(novoAluno: Aluno): void {
+        if (this.#alunos.find(aluno => aluno.id === novoAluno.id)) {
+            throw new Error('Aluno já matriculado')
+        }
+        this.#alunos.push(novoAluno);
+    }
+
+    aplicarProvaNaTurma(prova: Prova) {
+        for (const aluno of this.#alunos) {
+            prova.aplicarProva(aluno);
+        }
+    }
 }

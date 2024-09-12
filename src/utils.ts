@@ -1,6 +1,7 @@
 export class Utils {
     static #contadorIDAluno = 0
     static #contadorIDTurma = 0
+    static #contadorIDProva = 0
 
     static gerarIDAluno(): number {
         this.#contadorIDAluno++
@@ -10,6 +11,11 @@ export class Utils {
     static gerarIDTurma(): number {
         this.#contadorIDTurma++
         return this.#contadorIDTurma
+    }
+
+    static gerarIDProva(): number {
+        this.#contadorIDProva++
+        return this.#contadorIDProva
     }
 }
 
