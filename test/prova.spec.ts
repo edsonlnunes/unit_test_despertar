@@ -29,7 +29,8 @@ describe('Prova class', () => {
 
         const aluno = {
             jaFezAProva: sinon.stub().returns(false),
-            responderAProva: sinon.stub().returns([])
+            responderAProva: sinon.stub().returns([]),
+            aplicarResultadoProva: sinon.stub(),
         }
 
         prova.aplicarProva(aluno as any)
@@ -38,16 +39,22 @@ describe('Prova class', () => {
         assert(aluno.responderAProva.calledOnceWith(3, ['A', 'B']))
     })
 
-    it('Deve aplicar a prova no aluno e retornar a nota tirada', () => {
-        const prova = new Prova(['A', 'B', 'A', 'A'], ['A', 'B']);
+    it('Deve retornar a nota correta e aplicar o resultado da prova', () => {
+        const gabarito = ['A', 'B', 'C', 'B'];
+        const respostasPermitidas = ['A', 'B', 'C'];
 
         const aluno = {
             jaFezAProva: sinon.stub().returns(false),
-            responderAProva: sinon.stub().returns(['B', 'A', 'A', 'A'])
-        }
+            responderAProva: sinon.stub().returns(['A', 'B', 'B', 'A']),
+            aplicarResultadoProva: sinon.stub(),
+        };
 
-        const notaAluno = prova.aplicarProva(aluno as any)
+        const prova = new Prova(gabarito, respostasPermitidas);
 
-        equal(notaAluno, 2)
-    })
+        const nota = prova.aplicarProva(aluno as any);
+
+        equal(nota, 2);
+        assert(aluno.aplicarResultadoProva.calledOnce);
+        assert(aluno.aplicarResultadoProva.calledWith(2, prova.id));
+    });
 })
